@@ -77,7 +77,7 @@ public class TestCaseAlgorithmes extends TestCase {
 				);
 	}
 
-	public static void testComparaisonTriee()
+	public static void testComparaisonTriee() throws Exception
 	{
 		List<Integer> liste1 = getAsListInteger(new Integer[]{1,7,16,25,200,906});
 		List<Integer> liste2 = getAsListInteger(new Integer[]{1,2,16,24,25,600});
