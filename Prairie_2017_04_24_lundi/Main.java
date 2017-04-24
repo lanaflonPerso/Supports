@@ -51,43 +51,16 @@ public class Main {
 	
 	public static int minimum(List<Integer> liste)
 	{
-		int mini = liste.get(0);
-		for(Integer i : liste)
-		{
-			if( mini > i )
-			{
-				mini = i;
-			}
-		}
-		return mini;
+		return -1;
 	}
 	
 	public static int maximum(List<Integer> liste)
 	{
-		int maxi = liste.get(0);
-		for(Integer i : liste)
-		{
-			if( maxi < i )
-			{
-				maxi = i;
-			}
-		}
-		return maxi;
+		return -1;
 	}
 
 	public static int rechercheDichotomique(List<Integer> liste, Integer i)
 	{
-		int a = 0, b = liste.size();
-		while(b - a != 1)
-		{
-			int c = (a+b)/2;
-			if( liste.get(c) > i) b = c;
-			else a = c;
-		}
-		if( liste.get(a).equals(i))
-		{
-			return a;
-		}
 		return -1;
 	}
 
@@ -96,22 +69,7 @@ public class Main {
 			List<Integer> liste2
 			)
 	{
-		List<Integer> liste_fusionnee = new ArrayList();
-		int pos2 = 0;
-		for(Integer i : liste1)
-		{
-			while(pos2 < liste2.size() && liste2.get(pos2) < i)
-			{
-				liste_fusionnee.add(liste2.get(pos2++));
-			}
-			liste_fusionnee.add(i);
-		}
-		
-		for(;pos2 < liste2.size(); ++pos2)
-		{
-			liste_fusionnee.add(liste2.get(pos2));
-		}
-		return liste_fusionnee;
+		return null;
 	}
 	
 	public static void comparaisonTriee(
@@ -122,27 +80,6 @@ public class Main {
 			List<Integer> liste_unique_2
 			)
 	{
-		int pos2 = 0;
-		for(Integer i : liste1)
-		{
-			while(pos2 < liste2.size() && liste2.get(pos2) < i)
-			{
-				liste_unique_2.add(liste2.get(pos2++));
-			}
-			
-			if( pos2 < liste2.size() && liste2.get(pos2) == i )
-			{
-				liste_commun.add(liste2.get(pos2++));
-			}
-			else
-			{
-				liste_unique_1.add(i);
-			}
-		}
 		
-		for(;pos2 < liste2.size(); ++pos2)
-		{
-			liste_unique_2.add(liste2.get(pos2));
-		}
 	}
 }
