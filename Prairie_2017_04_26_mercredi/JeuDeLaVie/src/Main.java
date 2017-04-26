@@ -52,40 +52,12 @@ public class Main {
 	
 	private static int compter_voisins( boolean[][] grille, int x, int y)
 	{
-		int nb_voisin = 0;
-		for(int dx = -1; dx < 2; ++dx)
-		{
-			for(int dy = -1; dy < 2; ++dy)
-			{
-				if ((dx == 0) && (dy == 0)) continue;
-				if( (x+dx) >= 0 && (x+dx) < grille.length && 
-				    (y+dy) >= 0 && (y+dy) < grille[0].length )
-				{
-					if(grille[x+dx][y+dy]) ++nb_voisin;
-				}
-			}
-		}
-		return nb_voisin;
+
+		return -1;
 	}
 	
 	private static boolean[][] faireEvoluerCellules(boolean[][] grille) {
-		boolean[][] nouvelle_grille = new boolean[grille.length][grille[0].length];
-		for(int x = 0; x < largeur_interne; ++x)
-		{
-			for(int y = 0; y < hauteur_interne; ++y)
-			{
-				if( compter_voisins(grille, x, y) == 3 )
-				{
-					nouvelle_grille[x][y] = true;
-				}
-				else if( (compter_voisins(grille, x, y) == 2) && (grille[x][y]))
-				{
-					nouvelle_grille[x][y] = true;
-				}
-				else nouvelle_grille[x][y] = false;
-			}
-		}
-		return nouvelle_grille;
+		return grille;
 	}
 	
 	public static void main(String[] args)
