@@ -1,0 +1,6 @@
+SELECT STATIONS.nom AS NOM, count(*) AS compte 
+FROM STATIONS JOIN LIGNES_STATIONS ON id = station_id 
+WHERE 1
+GROUP BY STATIONS.nom 
+HAVING compte > 3
+ORDER BY compte DESC;
