@@ -11,19 +11,16 @@ import junit.framework.TestCase;
 
 public class TestCaseWithStdOutCatch extends TestCase {
 	protected ByteArrayOutputStream outContent = null;
-	//protected final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-
+	
 	public void setUpOutContent() throws IOException {
 		if( outContent != null ) outContent.close();
 		outContent = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(outContent));
-	    //System.setErr(new PrintStream(errContent));
 	}
 
-	@After
-	public void cleanUpStreams() {
-	    System.setOut(null);
-	    //System.setErr(null);
+	public void restoreSysOut()
+	{
+		System.setOut(null);
 	}
 	
 	public TestCaseWithStdOutCatch(String testName) {
