@@ -16,5 +16,9 @@ public class ExempleTypes {
 		// L'opération suivante affiche -2094967296
 		System.out.println(  b + 200000000 );
 		
+		int c = 5;
+		System.out.println(  "c / 2.0 => " + (c / 2.0) );
+		System.out.println(  "c / 2   => " + (c / 2) );
+		
 	}
 }
