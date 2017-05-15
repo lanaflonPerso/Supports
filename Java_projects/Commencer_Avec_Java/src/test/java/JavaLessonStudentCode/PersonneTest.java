@@ -5,10 +5,14 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
+import org.junit.FixMethodOrder;
+
 import JavaTestUtils.TestCaseWithStdOutCatch;
 import JavaTestUtils.TestUtils;
 import junit.framework.TestCase;
+import org.junit.runners.MethodSorters;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PersonneTest extends TestCaseWithStdOutCatch {
 
 	public PersonneTest( String testName )
