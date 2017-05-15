@@ -19,18 +19,11 @@ package JavaLesson;
 public class Array {
 	public static int[] Q01_creer_array()
 	{
-		return new int[]{13};
+		return null;
 	}
 	
 	public static int[] Q02_creer_array()
 	{
-		return new int[]{11,12,13};
+		return null;
 	}
-	
-	public static int[] Q03_creer_array(int n)
-	{
-		return new int[n];
-	}
-	
-	
 }

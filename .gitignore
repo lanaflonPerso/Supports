@@ -1,1 +1,7 @@
 *.swp
+*\#
+.project
+.classpath
+target
+.settings
+

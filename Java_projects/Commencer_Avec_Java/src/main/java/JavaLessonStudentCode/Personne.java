@@ -57,42 +57,4 @@ import java.util.List;
  *       Bonjour, je m'appelle Jean Dupont
  */
 public class Personne {
-	private final String prenom;
-	private final String nom;
-	private int age;
-	
-	public Personne(String nom, String prenom)
-	{
-		this(nom,prenom,-1);
-	}
-	
-	public Personne(String nom, String prenom, int age)
-	{
-		this.prenom = prenom;
-		this.nom = nom;
-		this.age = age;
-	}
-	
-	public String getPrenom()
-	{
-		return prenom;
-	}
-	
-	public String getNom()
-	{
-		return nom;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-	
-	public void direBonjour()
-	{
-		System.out.println("Bonjour, je m'appelle " + prenom + " " + nom);
-	}
 }
