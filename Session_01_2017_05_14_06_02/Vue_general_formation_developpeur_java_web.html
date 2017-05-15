@@ -1,0 +1,329 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Programme de la formation</title>
+<style type="text/css">
+    body {}
+li { list-style: none;  margin: 0; }
+p { margin: 0; }
+
+span.foldopened, span.foldclosed  {
+    font-size: xx-small;
+    border-width: 1;
+    font-family: monospace;
+    padding: 0em 0.25em 0em 0.25em;
+    background: #e0e0e0;
+    cursor:pointer;
+}
+span.foldopened  {
+    color: white;
+    VISIBILITY: visible;
+}
+span.foldclosed {
+    color: #666666;
+    VISIBILITY: hidden;
+}
+span.foldspecial {
+    color: #666666;
+    font-size: xx-small;
+    border-style: none solid solid none;
+    border-color: #CCCCCC;
+    border-width: 1;
+    font-family: sans-serif;
+    padding: 0em 0.1em 0em 0.1em;
+    background: #e0e0e0;
+    cursor:pointer;
+}
+span.l { color: red; font-weight: bold; }
+
+a.mapnode:link,
+a.mapnode:visited,
+a.mapnode:active,
+a.mapnode:hover {
+    text-decoration: none; color: black;
+}
+a.mapnode:hover { background: #eeeee0; }
+
+
+</style>
+<!-- ^ Position is not set to relative / absolute here because of Mozilla -->
+</head>
+<body>
+<script type="text/javascript">
+// Here we implement folding. It works fine with MSIE5.5, MSIE6.0 and
+// Mozilla 0.9.6.
+
+if (document.layers) {
+    //Netscape 4 specific code
+    pre = 'document.';
+    post = ''; }
+if (document.getElementById) {
+    //Netscape 6 specific code
+    pre = 'document.getElementById("';
+    post = '").style'; }
+if (document.all) {
+    //IE4+ specific code
+    pre = 'document.all.';
+    post = '.style'; }
+
+function layer_exists(layer) {
+    try {
+	eval(pre + layer + post);
+	return true; }
+    catch (error) {
+	return false; }}
+
+function show_layer(layer) {
+    eval(pre + layer + post).position = 'relative'; 
+    eval(pre + layer + post).visibility = 'visible'; }
+
+function hide_layer(layer) {
+    eval(pre + layer + post).visibility = 'hidden';
+    eval(pre + layer + post).position = 'absolute'; }
+
+function hide_folder(folder) {
+    hide_folding_layer(folder)
+    show_layer('show'+folder);
+
+    scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+}
+
+function show_folder(folder) {
+    // Precondition: all subfolders are folded
+
+    show_layer('hide'+folder);
+    hide_layer('show'+folder);
+    show_layer('fold'+folder);
+
+    scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+
+    var i;
+    for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+	show_layer('show'+folder+'_'+i); }
+}
+function show_folder_completely(folder) {
+    // Precondition: all subfolders are folded
+
+    show_layer('hide'+folder);
+    hide_layer('show'+folder);
+    show_layer('fold'+folder);
+
+    scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+
+    var i;
+    for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+	show_folder_completely(folder+'_'+i); }
+}
+
+
+
+function hide_folding_layer(folder) {
+    var i;
+    for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+	hide_folding_layer(folder+'_'+i); }
+
+    hide_layer('hide'+folder);
+    hide_layer('show'+folder);
+    hide_layer('fold'+folder);
+
+    scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+}
+
+function fold_document() {
+    var i;
+    var folder = '1';
+    for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+	hide_folder(folder+'_'+i); }
+}
+
+function unfold_document() {
+    var i;
+    var folder = '1';
+    for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+	show_folder_completely(folder+'_'+i); }
+}
+
+</script>
+<SPAN class="foldspecial" onclick="fold_document()">All +</SPAN>
+<SPAN class="foldspecial" onclick="unfold_document()">All -</SPAN>
+<p><span style="color: #0033ff; font-size: 16pt; ">Programme de la formation</span>
+<ul><li><span style="color: #00b439; font-size: 14pt; ">D&#xe9;veloppement</span>
+<ul><li><span style="color: #990000; font-size: 12pt; ">Back-end</span>
+    <p>
+      <i>Le back-end est la partie qui gère la requête reçue et génère la 
+      réponse renvoyée (une page HTML dans le cas d'un site public) à partir 
+      de la logique interne et de la base de donnée.</i>
+    </p>
+  
+<ul><li>Base de donn&#xe9;e</span>
+<ul><li><span id="show1_1" class="foldclosed" onClick="show_folder('1_1')" style="POSITION: absolute">+</span> <span id="hide1_1" class="foldopened" onClick="hide_folder('1_1')">-</span>
+<span style="font-weight: bold; ">Conceptions, norme</span>
+<ul id="fold1_1" style="POSITION: relative; VISIBILITY: visible;"><li><p>Il existe un certain nombre de normes en conception de base de donn&#xe9;e qui ont pour objectif notamment :&#xa;- de faciliter les traitements automatis&#xe9;s&#xa;- d'&#xe9;viter la redondance de donn&#xe9;e&#xa;- d'assurer la coh&#xe9;rence des donn&#xe9;es</span>
+</li>
+</ul>
+</li>
+<li><span id="show1_2" class="foldclosed" onClick="show_folder('1_2')" style="POSITION: absolute">+</span> <span id="hide1_2" class="foldopened" onClick="hide_folder('1_2')">-</span>
+<span style="font-weight: bold; ">SQL</span>
+<ul id="fold1_2" style="POSITION: relative; VISIBILITY: visible;"><li>Structured Query Langage : le langage usuel de requ&#xea;te en base de donn&#xe9;e</span>
+
+</li>
+
+</ul>
+</li>
+<li><span style="font-weight: bold; ">Diff&#xe9;rents SGBDR</span>
+
+</li>
+
+</ul>
+</li>
+<li>Java</span>
+<ul><li><span style="font-weight: bold; ">API, structure, concepts</span>
+
+</li>
+<li><span id="show1_3" class="foldclosed" onClick="show_folder('1_3')" style="POSITION: absolute">+</span> <span id="hide1_3" class="foldopened" onClick="hide_folder('1_3')">-</span>
+<span style="font-weight: bold; ">Programmation Orient&#xe9;e Objet</span>
+<ul id="fold1_3" style="POSITION: relative; VISIBILITY: visible;"><li>Le concept n'est pas limit&#xe9;e &#xe0; Java, mais particuli&#xe8;rement pr&#xe9;sent dans le langage</span>
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_4" class="foldclosed" onClick="show_folder('1_4')" style="POSITION: absolute">+</span> <span id="hide1_4" class="foldopened" onClick="hide_folder('1_4')">-</span>
+<span style="font-weight: bold; ">JPA / Hibernate</span>
+<ul id="fold1_4" style="POSITION: relative; VISIBILITY: visible;"><li>Le standard d'acc&#xe8;s aux donn&#xe9;es en java et son impl&#xe9;mentation la plus utilis&#xe9;e</span>
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li><span style="color: #990000; font-size: 12pt; ">Front-end</span>
+    <p>
+      <i>Le front-end est la partie vue par l'utilisateur.</i>
+    </p>
+  
+<ul><li><span id="show1_5" class="foldclosed" onClick="show_folder('1_5')" style="POSITION: absolute">+</span> <span id="hide1_5" class="foldopened" onClick="hide_folder('1_5')">-</span>
+<span style="font-weight: bold; ">HTML / template</span>
+<ul id="fold1_5" style="POSITION: relative; VISIBILITY: visible;"><li><p>Le langage de base des pages web, qui sert de support &#xe0; tous les &#xe9;l&#xe9;ments de la page (image, script, css, etc ...)&#xa;Il est repr&#xe9;sent&#xe9; dans la base de donn&#xe9;e sous forme de template g&#xe9;n&#xe9;riques qui sont remplis avec les informations sp&#xe9;cifiques.</span>
+</li>
+</ul>
+</li>
+<li><span id="show1_6" class="foldclosed" onClick="show_folder('1_6')" style="POSITION: absolute">+</span> <span id="hide1_6" class="foldopened" onClick="hide_folder('1_6')">-</span>
+<span style="font-weight: bold; ">Css</span>
+<ul id="fold1_6" style="POSITION: relative; VISIBILITY: visible;"><li>Cascading Style Sheet : les feuilles de style, qui contiennent les informations de mise en forme.</span>
+
+</li>
+
+</ul>
+</li>
+<li><span style="font-weight: bold; ">Javascript</span>
+    <p>
+      <i>Le presque seul langage de programmation dynamique exécutable dans le 
+      navigateur, il permet de modifier dynamiquement et rapidement le code 
+      HTML et donc l'affichage de la page.</i>
+    </p>
+  
+<ul><li><span id="show1_7" class="foldclosed" onClick="show_folder('1_7')" style="POSITION: absolute">+</span> <span id="hide1_7" class="foldopened" onClick="hide_folder('1_7')">-</span>
+AngularJS</span>
+<ul id="fold1_7" style="POSITION: relative; VISIBILITY: visible;"><li>Un framework (ensemble de librairie et de fonction) de d&#xe9;veloppement en javascript</span>
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li><span style="color: #990000; font-size: 12pt; ">Transverse</span>
+<ul><li><span style="font-weight: bold; ">Tests Unitaires</span>
+
+</li>
+<li><span id="show1_8" class="foldclosed" onClick="show_folder('1_8')" style="POSITION: absolute">+</span> <span id="hide1_8" class="foldopened" onClick="hide_folder('1_8')">-</span>
+<span style="font-weight: bold; ">Algorithmie</span>
+<ul id="fold1_8" style="POSITION: relative; VISIBILITY: visible;"><li><p>Principes de base d'algorithmie, notamment la question des acc&#xe8;s aux donn&#xe9;es, centrales en informatique (li&#xe9;e aux structures de donn&#xe9;e java, aux index en base de donn&#xe9;e, etc ...)</span>
+</li>
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li><span style="color: #00b439; font-size: 14pt; ">Outils</span>
+<ul><li>Outils de gestion de projet</span>
+<ul><li><span id="show1_9" class="foldclosed" onClick="show_folder('1_9')" style="POSITION: absolute">+</span> <span id="hide1_9" class="foldopened" onClick="hide_folder('1_9')">-</span>
+<span style="font-weight: bold; ">Maven</span>
+<ul id="fold1_9" style="POSITION: relative; VISIBILITY: visible;"><li><p>Outil de gestion de d&#xe9;pendance : on indique dans un fichier les d&#xe9;pendances du projet et maven g&#xe8;re la configuration avec les diff&#xe9;rents programmes : apache, eclipse</span>
+</li>
+</ul>
+</li>
+<li><span id="show1_10" class="foldclosed" onClick="show_folder('1_10')" style="POSITION: absolute">+</span> <span id="hide1_10" class="foldopened" onClick="hide_folder('1_10')">-</span>
+<span style="font-weight: bold; ">Git</span>
+<ul id="fold1_10" style="POSITION: relative; VISIBILITY: visible;"><li><p>Outil de gestion de configuration : on y sauvegarde les fichiers (push) afin de les partager et de pouvoir retrouver les diff&#xe9;rentes versions (et modification sur chacun)</span>
+</li>
+</ul>
+</li>
+<li><span style="font-weight: bold; ">Outils de d&#xe9;bogage</span>
+
+</li>
+<li><span id="show1_11" class="foldclosed" onClick="show_folder('1_11')" style="POSITION: absolute">+</span> <span id="hide1_11" class="foldopened" onClick="hide_folder('1_11')">-</span>
+<span style="font-weight: bold; ">Jenkins</span>
+<ul id="fold1_11" style="POSITION: relative; VISIBILITY: visible;"><li><p>Outil d'int&#xe9;gration continue : a chaque modification du code, on lance automatiquement les tests et/ou l'int&#xe9;gration, afin de d&#xe9;tecter les bugs au fur et &#xe0; mesure</span>
+</li>
+</ul>
+</li>
+
+</ul>
+</li>
+<li>Outil de conception</span>
+<ul><li><span id="show1_12" class="foldclosed" onClick="show_folder('1_12')" style="POSITION: absolute">+</span> <span id="hide1_12" class="foldopened" onClick="hide_folder('1_12')">-</span>
+<span style="font-weight: bold; ">UML</span>
+<ul id="fold1_12" style="POSITION: relative; VISIBILITY: visible;"><li><p>Universal Markup Langage : comme son nom l'indique on peut l'utiliser pour repr&#xe9;senter beaucoup de diagramme diff&#xe9;rents, mais en ici principalement les mod&#xe8;les de donn&#xe9;e et les diagramme de classe</span>
+</li>
+</ul>
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li><span style="color: #00b439; font-size: 14pt; ">Architecture</span>
+<ul><li><span id="show1_13" class="foldclosed" onClick="show_folder('1_13')" style="POSITION: absolute">+</span> <span id="hide1_13" class="foldopened" onClick="hide_folder('1_13')">-</span>
+<span style="font-weight: bold; ">Architecture MVC</span>
+<ul id="fold1_13" style="POSITION: relative; VISIBILITY: visible;"><li><p>Model View Controller : il s'agit de l'architecture usuelle c&#xf4;t&#xe9; serveur, o&#xf9; l'on s&#xe9;pare les 3 aspects ; Mod&#xe8;le de donn&#xe9;e, View (affichage) et Contr&#xf4;lleur (gestion des requ&#xea;tes)</span>
+</li>
+</ul>
+</li>
+<li><span style="font-weight: bold; ">Architecture N-tier</span>
+
+</li>
+<li><span style="font-weight: bold; ">Architecture REST</span>
+
+</li>
+
+</ul>
+</li>
+<li><span style="color: #00b439; font-size: 14pt; ">Environnement WEB</span>
+<ul><li><span style="font-weight: bold; ">Protocole HTTP / FTP / SSL</span>
+
+</li>
+
+</ul>
+</li>
+
+</ul><SCRIPT type="text/javascript">
+fold_document();
+</SCRIPT>
+</body>
+</html>
