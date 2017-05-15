@@ -10,7 +10,6 @@ public class App
 {
     public static void main( String[] args )
     {
-        Personne personne = new Personne("Dupont","Jean");
-        personne.direBonjour();
+    	ExempleTypes.exemples_types();
     }
 }

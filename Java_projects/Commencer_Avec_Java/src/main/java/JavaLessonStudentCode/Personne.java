@@ -44,9 +44,9 @@ import java.util.List;
  *       Cela signifie qu'ils ne peuvent être modifiés après le constructeur.
  */
 
-/* Enoncé des méthodes 9 à 12
+/* Enoncé des questions 9
  * 
- * Q09 : Méthode bonjour écrire une méthode direBonjour qui ne prend
+ * Q09 : Ecrire une méthode direBonjour qui ne prend
  * 		 pas d'argument et affiche, avec un println, la phrase : 
  * 		 
  * 		 Bonjour, je m'appelle {prenom} {nom}
@@ -56,5 +56,6 @@ import java.util.List;
  *       
  *       Bonjour, je m'appelle Jean Dupont
  */
+
 public class Personne {
 }
