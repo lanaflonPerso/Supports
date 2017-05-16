@@ -17,7 +17,7 @@ On manipulera :
 
 - des Personnes caractérisées par :
     - un id interne (int)
-    - un numéro de sécurité sociale
+    - un numéro de sécurité sociale (long / String)
     - un nom (String)
     - un prénom (String)
 
@@ -65,7 +65,8 @@ Q02_03 : Définir une méthode toString(), qui convertit la personne sous la for
 Q03_01 : Compléter la méthode  statique readFromFileLine, qui prend en argument une ligne du fichier personne.txt, et renvoit un nouvel objet de type Personne.
     Par exemple la ligne :  
 
-        0 Jean Dupont 123456789000000
+        0 Jean Dupont      123456789000000
+        				>= 200000000000000
        
     Sera transformé en un objet de type Personne d'id 0, de prénom Jean et de nom Dupont.
     On utilisera pour cela les méthodes très classiques :
@@ -88,6 +89,16 @@ public class Personne {
 	private int id;
 	private long numeroDeSecuriteSociale;
 	private String nom;
+	
+	
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
 	private String prenom;
 	
 	public static Personne readFromFileLine(String fileLine)
