@@ -125,8 +125,8 @@ public class PersonneTest extends TestCaseWithStdOutCatch {
 	
 	public void test_Q02_02_numero_de_departement()
 	{
-		assertTrue( getJeanDupont().getNumeroDepartement()   == 23 );
-		assertTrue( getElodieMartin().getNumeroDepartement() == 78 );
+		assertTrue( getJeanDupont().getNumeroDepartement()   == 67 );
+		assertTrue( getElodieMartin().getNumeroDepartement() == 67 );
 	}
 	
 	public void test_Q02_03_to_string()
@@ -171,5 +171,6 @@ public class PersonneTest extends TestCaseWithStdOutCatch {
 	public void test_Q03_01_02_readFromFileLine() throws IOException
 	{
 		List<Personne> liste_personne = Personne.readAllFromFiles("ressource/Exemple_personnes.txt");
+		
 	}
 }
