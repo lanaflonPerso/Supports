@@ -1,6 +1,7 @@
 package JavaLesson;
 
-public class ExempleTypes {
+public class ExempleTypes 
+{
 	public static void exemples_types()
 	{
 		double a = 1.0;
@@ -17,8 +18,17 @@ public class ExempleTypes {
 		System.out.println(  b + 200000000 );
 		
 		int c = 5;
-		System.out.println(  "c / 2.0 => " + (c / 2.0) );
-		System.out.println(  "c / 2   => " + (c / 2) );
+		System.out.println( c + " / 2.0 => " + (c / 2.0) );
+		System.out.println( c + " / 2   => " + (c / 2) );
+		
+		String nom = "Nicolas Rousset";
+		char caractere = 'c';
+		
+		String deux = "2";
+		int deux_chiffre = 2;
+		
+		int[] tableau = new int[]{ 4, 5, 6 };
+		System.out.println(tableau[1]);
 		
 	}
 }
