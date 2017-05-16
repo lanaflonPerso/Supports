@@ -16,6 +16,7 @@
 		<junit.version>4.11</junit.version>
 		<logback.version>1.0.13</logback.version>
 		<jcl-over-slf4j.version>1.7.5</jcl-over-slf4j.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<dependencies>
@@ -88,6 +89,7 @@
 				<downloadJavadocs>false</downloadJavadocs>
 				<!-- Avoid type mvn eclipse:eclipse -Dwtpversion=2.0 -->
 				<wtpversion>2.0</wtpversion>
+				<encoding>${project.build.sourceEncoding}</encoding>																																																																
 			</configuration>
 		  </plugin>
 
@@ -99,6 +101,7 @@
 			<configuration>
 				<source>${jdk.version}</source>
 				<target>${jdk.version}</target>
+				<encoding>${project.build.sourceEncoding}</encoding>
 			</configuration>
 		  </plugin>
 
@@ -109,6 +112,7 @@
 			<version>2.2</version>
 			<configuration>
 				<path>/CounterWebApp</path>
+				<encoding>${project.build.sourceEncoding}</encoding>
 			</configuration>
 		  </plugin>
 
