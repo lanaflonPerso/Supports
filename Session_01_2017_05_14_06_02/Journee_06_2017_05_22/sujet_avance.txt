@@ -1,0 +1,30 @@
+% Formation Java Simplon
+% Nicolas Rousset
+% 26/05/2017
+
+# Programme - avancé
+
+On souhaite développer un programme pour la gestion de formation.  
+On a défini le diagramme (de base) ci-dessous :  
+
+\includegraphics[width=90mm]{./img/diagramme_UML.png}
+
+Nous serons amené à le complêter
+
+# Questions
+
+- 1/ A votre avis qu'est-ce qui pourrait être améliorer dans ce diagramme ?
+
+- 2/ Implémentez ce diagramme.  
+
+- 3/ En rajoutant éventuellement des attributs, développez les fonctions suivantes :
+
+    - a/ Savoir si une formation est complète  
+    - b/ Connaître le prix TTC d'une formation (celui-ci dépendant si l'organisme est assujeti à la TVA ou non)  
+    - c/ Connaître la liste des formations données par un centre  
+    - d/ Pour un centre de formation donné, listez l'ensemble des compétences enseignées  
+    - e/ Pour une personne en reconversion, trouver la ou les formations qui permettent de couvrir le champ de compétences souhaité  
+    - f/ Même question, en minimisant le coût TTC
+    - g/ Même question, en s'assurant qu'ils existent des sessions de formation disponibles et en proposant les dates
+
+

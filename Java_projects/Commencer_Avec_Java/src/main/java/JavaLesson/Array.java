@@ -23,6 +23,11 @@ package JavaLesson;
  */
 
 public class Array {
+	public static void main( String[] args )
+	{
+		Q02_creer_array();
+	}
+	
 	public static int[] Q01_creer_array()
 	{
 		return null;
@@ -30,7 +35,38 @@ public class Array {
 	
 	public static int[] Q02_creer_array()
 	{
-		return null;
+		int[] tab  = new int[]{1,2,7,9};
+		int[] tab2 = new int[]{3,4,8,9};
+		int[] resultat = new int[tab.length + tab2.length];
+		int pos  = 0, pos2 = 0;
+		for(int i = 0; i < resultat.length ; ++i )
+		{
+			if( pos == tab.length )
+			{
+				resultat[i] = tab2[pos2++];
+			}
+			else if( pos2 == tab.length 
+				  || tab[pos] < tab2[pos2] )
+			{
+				resultat[i] = tab[pos++];
+			}
+			else
+			{
+				resultat[i] = tab2[pos2++];
+			}
+		}
+		
+		return tab;
+	}
+	
+	public static int[] Q023_creer_array()
+	{
+		int[] tab = new int[3];
+		for(int i = 0; i < 3 ; ++i)
+		{
+    		tab[i] = 11 + i;
+		}
+		return tab;
 	}
 	
 	public static int[] Q03_creer_array(int n)
