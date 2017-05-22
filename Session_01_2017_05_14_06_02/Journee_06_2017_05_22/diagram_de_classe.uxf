@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>12</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>132</x>
+      <y>24</y>
+      <w>1080</w>
+      <h>840</h>
+    </coordinates>
+    <panel_attributes>_class : TerreNeuveDeCompetition_
+--
+nbDeMedailles : int
+--
+TerreNeuveDeCompetition()
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>252</x>
+      <y>120</y>
+      <w>960</w>
+      <h>744</h>
+    </coordinates>
+    <panel_attributes>_class : TerreNeuve_
+--
+nbDPersonnesSauvees : int
+--
+sauverQuelquunDeLaNoyade()
+afficherSaTaille()
+--
+TerreNeuve(String nom)
+bg=yellow
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>384</x>
+      <y>264</y>
+      <w>828</w>
+      <h>600</h>
+    </coordinates>
+    <panel_attributes>_class : Chien_
+--
+nbPattes : int
+nom : String
+--
+getNom()
+setNom(String nom)
+aboyer()
+/afficherSaTaille()/
+--
+Chien(String nom)
+bg=orange
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>84</y>
+      <w>84</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>50.0;120.0;10.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>240</y>
+      <w>96</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>60.0;160.0;10.0;160.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

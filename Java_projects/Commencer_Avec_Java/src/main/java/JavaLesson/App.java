@@ -82,7 +82,22 @@ public class App
     	System.out.println("5 : " + (a3 == b3));
     }
     
+    private String nom;
+    
+    public static void coucou()
+    {
+    	System.out.println("Bonjour " + nom);
+    	App.coucou();
+    }
+    
     public static void main( String[] args )
+    {
+    	coucou();
+    }
+    
+    
+    
+    public static void main7( String[] args )
     {
     	int[] tab = null;
     	System.out.println(tab);
