@@ -1,4 +1,4 @@
-package JavaTestUtils;
+package javaTestUtils;
 
 import java.lang.reflect.Field;
 
@@ -8,7 +8,7 @@ public class TestUtils {
 		Field fields[] = class_.getDeclaredFields();
 		for(Field field : fields)
 		{
-			if( field.getName() == name ) return field;
+			if( field.getName().equals(name) ) return field;
 		}
 		return null;
 	}

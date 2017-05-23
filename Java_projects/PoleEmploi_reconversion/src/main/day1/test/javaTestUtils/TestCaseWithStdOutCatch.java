@@ -1,4 +1,4 @@
-package JavaTestUtils;
+package javaTestUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
