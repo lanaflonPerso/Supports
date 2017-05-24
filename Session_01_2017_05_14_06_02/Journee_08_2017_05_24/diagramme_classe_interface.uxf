@@ -27,8 +27,7 @@ boolean estDisponible()</panel_attributes>
     <panel_attributes>_class: Chien_
 --
 nom: String
---
-boolean nourrir(int kiloNouritture)
+
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -43,8 +42,7 @@ boolean nourrir(int kiloNouritture)
     <panel_attributes>_class: Tigre_
 --
 race: String
---
-boolean nourrir(int kiloNouritture)</panel_attributes>
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -132,7 +130,7 @@ poids: int
       <x>270</x>
       <y>430</y>
       <w>600</w>
-      <h>270</h>
+      <h>210</h>
     </coordinates>
     <panel_attributes>_class: ZooAnimalerie_
 --
