@@ -1,0 +1,17 @@
+
+On a un diagramme de classe qui possède :  
+- 1 classe abstraite (Animal)  
+- 1 interface (Achetable)  
+- 4 classes concrètes (Tigre, Chien, SacDeCroquette, ZooAnimalerie)  
+
+Une classe concrète est une classe qui est complète, et sur laquelle on peut faire des new.  
+Cela n'est pas possible sur une interface ou sur une classe abtraite (déclarée comme telle par le mot clé **abstract**).  
+
+Le but de l'exercice est d'être capable, dans la classe ZooAnimalerie, de faire des traitements sur les objets Achetables (types réels Chien ou SacDeCroquette) ou sur les objets de type Animal sans distinguer entre les Chiens et les SacDeCroquette dans le premier cas, et sans distinguer entre les Chien et les Tigre dans le deuxième cas.  
+
+Déroulement de l'exercice :  
+
+1/ Implémenter la classe Animal
+2/ Implémenter la classe 
+
+

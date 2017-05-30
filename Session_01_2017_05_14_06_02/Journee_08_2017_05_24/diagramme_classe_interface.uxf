@@ -9,7 +9,7 @@
       <h>100</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
-achetable
+Achetable
 --
 int getPrix()
 int nbDisponibles()
@@ -59,7 +59,7 @@ poids: int
 dangeureux: boolean
 besoinNourriture: int
 --
-/boolean abstract nourrir(int kiloNouritture)/</panel_attributes>
+/abstract boolean nourrir(int kiloNouritture)/</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -130,18 +130,24 @@ poids: int
       <x>270</x>
       <y>430</y>
       <w>600</w>
-      <h>210</h>
+      <h>330</h>
     </coordinates>
     <panel_attributes>_class: ZooAnimalerie_
 --
 listeChiens: List&lt;Chien&gt;
 listeTigres: List&lt;Tigre&gt;
 listeSacCroquettePourChien: List&lt;SacCroquettePourChien&gt;
-listeObjetsAchetable(): List&lt;Achetable&gt;
-listeObjetsAchetable(): List&lt;Animal&gt;
+listeObjetsAchetable: List&lt;Achetable&gt;
+listeAnimal: List&lt;Animal&gt;
 --
+## Déterminer le prix total de tous les objets achetables, sans faire de 
+## de traitement séparé entre Chiens et SacCroquette
 int prixToutAcheter()
+
+## Déterminer la quantité de nourriture totale nécessaire
+## de traitement séparé entre Chiens et Tigre
 int besoinNourritureTotal()
+
 void ajouterChien( Chien chien )
 void ajouterTigre( Tigre tigre )
 void ajouterSacCroquettePourChien( SacCroquettePourChien s )</panel_attributes>

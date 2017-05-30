@@ -1,0 +1,67 @@
+% Formation Java Pôle Emploi
+% Nicolas Rousset
+% Sujet n°1 - gestion de villes  
+
+# Question 1 :  
+
+Créez une classe Ville qui possède les attributs suivants :  
+- un nom
+- une longitude  
+- une latitude  
+
+Quel type allez-vous utiliser ?  
+
+# Question 2 :  
+
+Créez les accesseurs (getters et setters) pour ces 3 attributs.  
+Mettez ces attributs en private.  
+
+# Question 3 :  
+
+Définissez un constructeur qui prennent 3 arguments, dans cet ordre :  
+- le nom  
+- une longitude  
+- une latitude  
+
+# Question 4 :  
+
+Définissez une méthode estDansLHemisphereNord, qui ne prend pas d'arguments 
+et renvoit true (un booléen) si la ville est dans l'hémisphère Nord.
+
+Hint: Comment peut-on savoir à partir de la latitude si une ville est dans 
+l'hémisphère Nord ?  
+
+# Question 5 :
+
+Définissez une méthode estPlusAuNordQue, qui prend en argument une autre **Ville**
+et renvoit true si la **Ville** pour laquelle la méthode est appelée (le **this**)
+est plus au nord que la **Ville** donnée en argument.  
+
+# Question 6 : 
+
+Même question pour une méthode similaire estPlusALEst
+
+# Question 7 :
+
+En utilisant les méthodes précédentes et sans utiliser les latitude et longitude,
+mais en utilisant les opérateurs booléen écrivez des fonctions estPlusALOuest et 
+estPlusAuSud
+
+# Question 8 :
+
+En utilisant le fichier DistanceLatitudeLongitude.java fourni, écrivez une méthode 
+calculerDistance, qui prend en argument une autre ville et renvoit la distance.  
+
+# Question 9 :
+
+En utilisant la méthode précédente, écrivez une méthode trouvezVilleLaPlusProche  
+qui prend en argument une liste de Ville et renvoit la Ville de la liste qui est
+la plus proche de la Ville pour laquelle la méthode est appelée.  
+
+# Question 10 :
+
+Ecrivez une méthode **static** qui prend en argument une liste de ville et renvoit 
+un tableau à deux dimensions de double, dont la valeur i, j est la distance de 
+la ville i ) la ville j dans la liste donnée en entrée.  
+
+
