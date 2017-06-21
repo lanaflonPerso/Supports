@@ -25,7 +25,8 @@ volumes en jeu
 ** Types de données
 *** Entités-Relations
 cf objects comme compositions d'attributs de types primitifs
-SGBDR
+*SGBDR* c'est ce qui va nous intéresser
+Liens avec feuilles Excel (mais aussi *différences* !)
 *** Documents
 cf typage dynamique vs typage statique
 NoSQL
