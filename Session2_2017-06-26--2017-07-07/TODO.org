@@ -1,0 +1,105 @@
+
+* Développement "full stack"
+SCHEDULED: <2017-06-26 Mon 09:00>
+
+** Contexte dans le SI d'une entreprise
+** Maintenance évolutive
+On ne part pas de "rien", et en fait, même dans ce cas, on fait souvent évoluer un "squelette" généré automatiquement (/scafolding/).
+
+** Exemples pratiques :ERIC:
+SCHEDULED: <2017-06-26 Mon 14:00>
+
+Cf. Pôle Emploi promo #1
+
+* Bases de données
+SCHEDULED: <2017-06-27 Tue 09:00>
+** Contexte
+*** Persistance
+fiabilité
+accès concurrents
+*** Performance
+volumes en jeu
+
+- accès partiels (filtrage)
+- opérations (max, min, sommes, …)
+** Types de données
+*** Entités-Relations
+cf objects comme compositions d'attributs de types primitifs
+SGBDR
+*** Documents
+cf typage dynamique vs typage statique
+NoSQL
+*** Séries temporelles
+*** Données géolocalisées
+* SGBDR, SQL
+** Types d'utilisation
+*** Bibliothèque (/embedded/)
+   https://en.wikipedia.org/wiki/Embedded_database
+e.g. https://fr.wikipedia.org/wiki/H2_(base_de_donn%C3%A9es) 
+*** Spécifique à l'application
+e.g. https://fr.wikipedia.org/wiki/H2_(base_de_donn%C3%A9es) 
+https://fr.wikipedia.org/wiki/PostgreSQL
+
+voire
+https://fr.wikipedia.org/wiki/MySQL
+
+*** Partagée par le SI
+serveur, comptes utilisateurs, permissions
+https://fr.wikipedia.org/wiki/PostgreSQL
+
+
+
+** StandardS et implémentations
+SQL92 ? 
+ Quelle base de données choisir ? Quel niveau de /dépendance/ ?
+- Dates
+- encodage des chaînes de caractères
+
+* Notions fondamentales
+
+(NOTE : l'essentiel du temps de formation)
+** Outils :
+*** Sans installations
+    https://www.khanacademy.org/computer-programming/new/sql
+
+    Attention ! Pas de contraintes sur les types   https://sqlite.org/faq.html#q3
+*** "Installation" minimale (téléchargement & exécution)
+http://www.h2database.com/html/main.html
+http://www.h2database.com/html/cheatSheet.html
+
+
+
+
+** Clés
+*** primaire
+*** secondaire
+** Filtrages
+** Aggrégats
+** Jointures
+** Composabilité
+** Transaction
+  roll-back
+* API
+** Chaînes de caractères
+*Ne pas concaténer des chaînes de caractères avec quoi que ce soit venant de l'extérieur !*
+SQL injection 
+https://xkcd.com/327/
+** Requêtes paramétrées
+
+* Problématiques de performance
+
+** Indexes
+
+** Dénormalisation
+
+
+* ORM
+Automatisation des liens :
+- classes / tables 
+- attributs / colonnes
+- objets / lignes
+
+Indépendance du SGBDR .
+
+
+
