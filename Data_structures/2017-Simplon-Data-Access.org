@@ -1,0 +1,294 @@
+#+TITLE: Formation Java : Chargement et sélection de données
+#+DATE: 
+#+OPTIONS: ^:nil toc:2
+#+LANGUAGE: fr
+#+LATEX_HEADER: \usepackage[AUTO]{babel}
+
+#+BEGIN_SRC elisp :exports none :results silent
+(org-babel-do-load-languages 'org-babel-load-languages '((ditaa . t))) 
+  (add-to-list 'org-latex-packages-alist '("" "listings"))
+  (add-to-list 'org-latex-packages-alist '("" "color"))
+  (add-to-list 'org-latex-packages-alist '("" "minted"))
+  (setq org-latex-listings 'minted)
+
+  (setq org-latex-pdf-process '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+                                "bibtex %b"
+                                "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+                                "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+  (setq org-latex-minted-options '(("frame" "lines")
+                                   ("fontsize" "\\scriptsize")
+                                   ("xleftmargin" "\\parindent")
+                                   ("linenos" "")))
+#+END_SRC
+
+* Contexte
+
+Considérant les programmes qui composent un [[https://fr.wikipedia.org/wiki/Syst%C3%A8me_d%27information][/système d'information/]], on a vu que
+la modélisation des données qui nous intéressent spécifiquement (/entités/ du
+domaine d'application) pouvaient être modélisées en Java par des /objets/, instances de /classes/.
+
+Pour que ces données survivent à l'exécution des programmes, il faut qu'elles
+/persistent/ sous la forme d'un stockage permanent, par exemple sous la forme de
+fichier.
+
+
+Grâce aux possibilités d'abstractions fournies par le langage (héritage,
+implémentation d'/interfaces/), l'implémentation proprement dites (fichier local
+ou données récupérées à partir d'une URL par exemple), n'ont pas vraiment
+d'impact tant qu'on peut considérer la source comme un /flux/ de données. On
+peut facilement lire l'intégralité des données et /construire/ les objets au fur
+et à mesure en les stockant dans une structure de données, par exemple l'une des
+nombreuses /collections/ de la bibliothèque standard Java.
+
+
+On pourra ensuite utiliser ces données pour interroger le programme afin de
+sélectionner un certain sous-ensemble des données selon divers critères.
+
+* Exemple
+
+On a repris l'exemple des villes caractérisées par :
+- un nom
+- une latitude
+- une longitude
+
+
+Comme une ville ne changera ni de nom ni de localisation, on en profitera pour
+définir une classe d'objets /immutables/, et bénéficier de la tranquillité d'esprit qui en découle, avec les attributs suivants :
+#+NAME: src-city-attr
+#+BEGIN_SRC java
+    private final String name;
+    private final double latitude;
+    private final double longitude;
+#+END_SRC
+On aura donc un constructeur :
+#+NAME: src-city-cstor
+#+BEGIN_SRC java
+  public City(String name, double latitude, double longitude){
+      this.name= name;
+      this.latitude= latitude;
+      this.longitude= longitude;
+  } 
+#+END_SRC
+
+Avec la possibilité de connaître la distance entre deux villes et entre un couple de coordonnées et une ville.
+#+NAME: src-city-distanceTo-lat-long
+#+BEGIN_SRC java
+    public double distanceTo(double latitude, double longitude){
+        double R= 6371e3;
+        double phi1=Math.toRadians(this.latitude);
+        double phi2=Math.toRadians(latitude);
+        double deltaPhi=Math.toRadians(latitude- this.latitude);
+        double deltaLambda= Math.toRadians(longitude- this.longitude);
+        double a= Math.sin(deltaPhi/2) * Math.sin(deltaPhi/2) +
+            Math.cos(phi1) * Math.cos(phi2) * Math.sin(deltaLambda/2) * Math.sin(deltaLambda/2);
+        double c= 2* Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        return R * c;
+    }
+#+END_SRC
+
+Évidemment, pour la distance avec une ville, on réutiliser le code précédent :
+#+NAME: src-city-distaneTo-City
+#+BEGIN_SRC java
+  public double distanceTo(Ville other){
+      return distanceTo(other.latitude, other.longitude);
+  }
+#+END_SRC
+
+
+
+Ne serait-ce que pour débugger, une méthode =toString()= de conversion en chaîne de caractères est toujours utile :
+
+#+NAME: src-city-toString
+#+BEGIN_SRC java
+    public String toString(){
+        return "Ville: {name: "+name+", latitude: "+latitude+", longitude: " + longitude+"}";
+    }
+#+END_SRC
+
+Pour trouver une ville la plus proche d'un point, on peut implémenter une méthode =closestTo= :
+#+NAME: src-city-clostestTo-lat-long
+#+BEGIN_SRC java
+  public static City closestTo(double latitude, double longitude
+                               , Collection<City> cities
+                               , double deltaD){
+      City res=null;
+      double minD= Double.POSITIVE_INFINITY;
+      for(City city : cities){
+          double currentD= city.distanceTo(latitude, longitude);
+          if((currentD < minD) && (currentD > deltaD) ){
+              minD= currentD;
+              res= city;
+          }
+      }
+      return res;
+  }
+#+END_SRC
+
+Cette implémentation suit le schéma classique d'une initialisation du résultat
+(=res=) à la valeur correspondant à un ensemble vide (=null=) puis d'une mise à
+jour de ce résultat pour tenir compte de chacun des éléments de l'ensemble à
+traiter. On remarquera que cet ensemble est pris en argument selon l'interface
+=Collection<City>= de façon à être le plus générique, et donc réutilisable, possible.
+
+Le détail non évident est l'ajout d'une argument =deltaD=. Il servira à pouvoir
+réutiliser cette méthode pour trouver la ville la plus proche d'une ville
+donnée. Évidemment, la ville la plus proche est elle-même ! On pourrait passer
+en argument une copie de l'ensemble des villes à laquelle on aura retiré la
+ville en question, mais il est aussi simple et plus performant de passer une
+valeur =deltaD= minimale telle qu'on en prendra pas en compte de ville située à
+une distance inférieure à =deltaD= du point de référence.
+
+Dans le cas où l'on a pas l'utilité de cet argument (on cherche la ville la plus
+proche d'un point et non pas d'une ville), cet argument =deltaD= est à 0 et l'on
+peut /surcharger/ la méthode pour cette valeur par défaut :
+
+#+NAME: src-city-clostestTo-lat-long-def
+#+BEGIN_SRC java
+  public static City closestTo(double latitude, double longitude
+                               , Collection<City> cities){
+      return clostestTo(latitude, longitude, cities, 0.);
+  }
+#+END_SRC
+
+
+Pour trouver une ville la plus proche d'une autre ville, on passe en argument
+les longitude et latitude de la ville considérée. Pour la valeur de =deltaD=, on
+doit se baser sur la précision des valeurs numériques et l'on peut utiliser la méthode statique [[https://docs.oracle.com/javase/6/docs/api/java/lang/Math.html#ulp%2528double%2529][Math.ulp]] :
+
+#+NAME: src-city-clostestTo-city
+#+BEGIN_SRC java
+  public static City closestTo(City ref, Collection<Ville> cities){
+      return closestTo(ref.latitude, ref.longitude, cities, Math.ulp(1.));
+  }
+
+#+END_SRC
+
+Bien sûr, on voudra pouvoir désigner une ville non par la référence vers l'objet
+lui-même, mais par son nom. Il suffit pour cela de faire une fonction qui recherche une ville en fonction de son nom :
+
+#+NAME: src-city-findByName
+#+BEGIN_SRC java
+    public static City findByName(String name, Collection<City> cities){
+        for(City city : cities){
+            if(city.name.equals(name)){
+                return city;
+            }
+        }
+        return null; // throws ?
+    }
+
+#+END_SRC
+
+On est dans un cas où l'on peut faire un retour prématuré (/early exit/) puisque
+dès qu'on a trouvé une ville avec le nom recherché, il n'est plus la peine de
+parcourir le reste de la collection.
+
+Dans le cas où aucune ville n'a le nom recherché, on aurait à priori plusieurs résultats possibles :
+- lancer une exception de type [[https://docs.oracle.com/javase/8/docs/api/java/util/NoSuchElementException.html][NoSuchElementException]]
+- retourner une référence nulle
+
+L'inconvénient de la référence nulle est qu'il est facile d'oublier de vérifier
+et traiter ce cas, ce qui produira une [[https://docs.oracle.com/javase/7/docs/api/java/lang/NullPointerException.html][NullPointerException]] au moment où l'on
+essaiera d'utiliser la référence. Une solution plus moderne serait d'utiliser une valeur de retour de type [[https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html][=Optional]]<City>=, mais le gain est [[https://homes.cs.washington.edu/~mernst/advice/nothing-is-better-than-optional.html#optional-methods][sujet à controverse]].
+
+* Lecture des données
+
+La lecture des données qui caractérisent une ville peut être faite trivialement,
+ligne par ligne, mais il faut prendre soin d'anticiper que le fichier ne sera
+pas parfait et qu'il y aura donc des données manquantes ou incorrectes. Dans ce
+cas, on passera juste la ligne correspondant à un enregistrement défectueux (on
+peut signaler l'erreur sur la sortie d'erreur =System.err=). Bien sûr, lors de
+la conversion en type numérique, il faudra prendre en compte le séparateur de
+chiffres décimaux qui est une virgule (=,=) dans le fichier alors que, par défaut, Java attend
+un point (=.=).
+#+NAME: src-city-read
+#+BEGIN_SRC java
+    public static List<City> read(String citiesURL) throws IOException {
+        List<City> res= new ArrayList<City>();
+        URL url= new URL(citiesURL);
+        try(BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
+            br.readLine(); // skip header
+            for(String line = br.readLine(); line != null; line= br.readLine()){
+                String[] data = line.split(";");
+                if(data.length == 3){
+                    for(int i=1; i !=3; ++i){
+                        data[i]= data[i].replace(',','.');
+                    }
+                    try{
+                        res.add(new City(data[0], Double.parseDouble(data[1]), Double.parseDouble(data[2])));
+                    }catch(NumberFormatException e){
+                        System.err.println(e);
+                    }
+                }
+            }
+        }
+        return res;
+    }
+#+END_SRC
+
+* Requêtes
+
+** Villes dans un rayon donné
+ On s'intéresse à un sous-ensemble des villes qui est à une distance strictement
+ inférieure à un rayon donné par rapport à un centre donné. Une telle sélection
+ peut facilement être implémentée :
+ #+NAME: src-city-dist-closerThan
+ #+BEGIN_SRC java
+   public static Set<City> closerThan(double latitude, double longitude, double dist, Collection<City> cities){
+       Set<City> res= new HashSet<City>();
+       for(City city : cities){
+           if(city.distanceTo(latitude, longitude) < distance){
+               res.add(city);
+           }
+       }
+       return res;
+   }
+ #+END_SRC
+
+ La complexité algorithmique de cette requête est =O(n)= puisqu'il faut tester
+ chacune des villes de l'ensemble. On pourrait faire mieux, mais ceci n'est pas
+ trivial. En effet, on ne peut pas appliquer de recherche dichotomique puisqu'il
+ n'y a pas de relation d'ordre totale selon laquelle trier nos villes.
+
+
+ On choisit d'utiliser une structure de donnée de type =Set= parce que l'on
+ anticipe le besoin de faire (efficacement) des intersections. Sinon, on aurait
+ pu retourner une collection implémentant par exemple l'interface =List= comme
+ =ArrayList=.
+
+** Intersection de sous-ensembles de villes
+Si l'on s'intéresse à une intersection de sous-ensembles de villes par exemple
+obtenus avec la méthode =closerThan=, il suffit d'utiliser la méthode [[https://docs.oracle.com/javase/7/docs/api/java/util/Set.html#retainAll(java.util.Collection)][retainAll]]
+de l'interface =Set=. *Attention : * l'appel de cette méthode modifie le
+sous-ensemble en question puisque c'est une *référence* sur la collection qui
+sera passée en paramètre. Il faut donc se poser la question du meilleur
+compromis entre :
+- tranquilité d'esprit :: on travaille sur une copie du sous-ensemble de façon à
+     ne pas modifier celui-ci.
+- performance :: on évite le coût en temps et en mémoire de la copie et l'on
+     modifie directement l'un des sous-ensemble passés en arguments et dont on
+     veut calculer l'intersection.
+
+* Limitations
+Bien qu'extrêmement limité, notre exemple montre déjà les limites d'une approche
+aussi simpliste de la manipulation de donnés
+** Validation nécessaire des données en lecture
+Tout d'abord, on a pas de garanties sur le fait que les données stockées soient
+valides, ce qui oblige à valider à chaque lecture.
+
+** Limitation par la mémoire disponible
+Le fait de charger l'ensemble des données en mémoire limite la quantité de
+données manipulables.
+** Performance de la sélection
+Si la performance de nos fonctions de sélection (complexité algorithmique
+linéaire) est acceptable pour une utilisation interactive, elle ne permettrait
+pas de traiter très efficacement de façon automatique/répétée de grand nombres
+de requêtes.
+
+** Modifications ? (ajouts, altérations, suppressions)
+
+Le principal problème de cette approche est qu'elle ne permet absolument pas de
+traiter de façon satisfaisante toutes modifications du jeu de données.
+Il serait inenvisageable de réécrire l'ensemble du fichier à chaque fois !
+
+* TODO Une solution : les bases de données
